@@ -1,13 +1,11 @@
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/blog_demo', {useNewUrlParser: true})
+
+let Post = require('./models/post')
 //USER - email, name
 
 //POST - title, content
-let postSchema = new mongoose.Schema({
-    title: String,
-    content: String
-})
-let postModel = mongoose.model('Post', postSchema)
+
 let userSchema = new mongoose.Schema({
     email: String,
     name: String,
@@ -19,4 +17,29 @@ let userSchema = new mongoose.Schema({
     ]
 })
 let User = mongoose.model('User', userSchema)
-postModel.create()
+// Create Post
+// Post.create({
+//     title: 'How to cook the best burger pt. 3',
+//     content: 'bla bla bla'
+// },(err, post) =>{
+//     // Find User
+//     User.findOne({email : "charlie@brown.edu"}, (err, foundUser)=>{
+//         if(err) console.log(err)   
+//         else {
+//             // Push post to user
+//             foundUser.posts.push(post);
+//             // Save user
+//             foundUser.save((err, data)=>{
+//                 if(err) console.log(err);
+//                 else {
+//                     console.log(data);
+//                 }
+//             })
+//         }
+//     })
+//  }
+// )
+User.findOne({email : "charlie@brown.edu"}).populate('posts').exec((err, user)=>{
+    if(err) console.log(err);
+    else  console.log(user);   
+})
