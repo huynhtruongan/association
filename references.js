@@ -2,28 +2,19 @@ const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/blog_demo', {useNewUrlParser: true})
 
 let Post = require('./models/post')
+let User = require('./models/user')
 //USER - email, name
 
 //POST - title, content
 
-let userSchema = new mongoose.Schema({
-    email: String,
-    name: String,
-    posts: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Post'
-        }
-    ]
-})
-let User = mongoose.model('User', userSchema)
+
 // Create Post
 // Post.create({
-//     title: 'How to cook the best burger pt. 3',
-//     content: 'bla bla bla'
+//     title: 'How to cook the best burger pt. 4',
+//     content: 'bla bla boo'
 // },(err, post) =>{
 //     // Find User
-//     User.findOne({email : "charlie@brown.edu"}, (err, foundUser)=>{
+//     User.find({email : "charlie@brown.edu"}, (err, foundUser)=>{
 //         if(err) console.log(err)   
 //         else {
 //             // Push post to user
